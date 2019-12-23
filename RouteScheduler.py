@@ -112,6 +112,8 @@ class RouteSchduler(object):
             u:Vertex = heap.poll()
             visited[u] = True
             for interface_id in u.edges.keys():
+                if self.use_spanning_tree and self.blocked[u.id][interface_id]: # Spanning Tree Blocked
+                    continue
                 e_hash_id = u.edges[interface_id]
                 e = self.graph._edges[e_hash_id]
                 v = getNeighbor(e, u.id)
