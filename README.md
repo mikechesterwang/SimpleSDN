@@ -61,7 +61,7 @@ Schedule routes by a specified algorithm. Three pre-defined algorithms are provi
 
 The architecture of this program is shown in the figure below. 
 
-![image-20191223233738242](C:\Users\ASUS\AppData\Roaming\Typora\typora-user-images\image-20191223233738242.png)
+![image-20191223233738242](archived/img/image-20191223233738242.png)
 
 ​                                                                        *Fig. 1 Architecture*
 
