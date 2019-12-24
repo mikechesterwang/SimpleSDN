@@ -22,6 +22,7 @@ from ryu.lib.packet import ethernet, arp, icmp
 from ofctl_utils import OfCtl, VLANID_NONE
 
 from topo_manager import TopoManager
+from config import config_loop_mode, config_sp_mode
 
 
 class ShortestPathSwitching(app_manager.RyuApp):
@@ -30,8 +31,8 @@ class ShortestPathSwitching(app_manager.RyuApp):
     def __init__(self, *args, **kwargs):
         super(ShortestPathSwitching, self).__init__(*args, **kwargs)
 
-        self.loop_mode = True
-        self.sp_mode = self.loop_mode and True
+        self.loop_mode = config_loop_mode
+        self.sp_mode = self.loop_mode and config_sp_mode
         self.tm = TopoManager(self.sp_mode)
         self.port_map = {'switch_1': [1, 2], 'switch_2': [1, 2, 3], 'switch_3': [1, 2]}
 
