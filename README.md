@@ -51,11 +51,25 @@ Some test cases to test `Graph.py`. Also demonstrating how to use some functions
 
 Schedule routes by a specified algorithm. Three pre-defined algorithms are provided. Including calculating Spanning Tree, computing minimum hop count by BFS and computing shortest path by Dijkstra's algorithm.
 
+`run_mininet.py`
 
+Runs mininet with diﬀerent topologies. Provided by the course, not need to modify this.
 
+`shortest_paths.py`
 
+The main file to implement the SDN, it's a bridge between topo manager and the network, with the function of Event Listener in the graph below. Also it finish the flow table setting movement. The course provided a simple version.
 
+`topo_manager.py`
 
+Implement the Topology Manager, which use to store the status of the network and abstract these information to abstract Graph and query the flow table suggestion from Route Scheduler. This file finished based on the topo manager example which provided by course.
+
+`ofctl_utils.py`
+
+Some useful utils implement by ryu provided by the course.
+
+`config.py`
+
+The configuration file help the user to configure some attribute easily.
 
 ## Architecture
 
@@ -69,11 +83,9 @@ The architecture of this program is shown in the figure below.
 
 **Route Scheduler** : Maintains an abstract graph of the real network. Send `flow table suggestion` to topology manager when a query is received. The `flow table suggestion` is computed by a algorithm selected from some pre-defined algorithms by user.
 
-Topology Manager : 
+**Topology Manager :** Stored the needed information (including the concrete state of switch, link, host, some mapping information and so on).  Abstract the topology, send the topo change to abstract graph, and query the needed algorithm from Route Scheduler.
 
-Event Listener : 
-
-
+**Event Listener :**  Listen the Event from the network, and send the changes to the Topology Manager. Also finish the last step of setting flow table.
 
 #### Workflow
 
@@ -95,9 +107,97 @@ After that, topology manager set a new forward path in the network by installing
 
 ## Controller
 
+### The mode configuration explanation
 
+**loop_mode**
 
+Set the mode whether the non-mapping ARP message will cause a loop storm.
 
+False: all the ARP message which cannot mapping a specific MAC address will packet in but no actions, that means the ARP message will not cause loop storm.
+
+True: the ARP message which cannot mapping a specific MAC address will packet in and will be sent back by OFPP_FLOOD, that means it maybe cause loop storm.
+
+**sp_mode**
+
+Set if use the spanning tree algorithm.
+
+For spanning tree algorithm will cause the shortest path not the true shortest path, the sp_mode will be False when the loop_mode is False even though the sp_mode set to be True.
+
+False: will not use the spanning tree algorithm.
+
+True: using the spanning tree algorithm to avoid non mapping ARP message causing loop storm.
+
+### The abstraction flow
+
+The brief step:
+
+```
+Network -> Event -> Changes -> shorest_path.py -> topo_manager.py -> exchange the changes and store the infomation -> Abstract Graph & Route Scheduler
+```
+
+Some examples (just show the method work flow, some working details, including the event exchanges, status storing and so on, will not be shown here):
+
+The method work flow when a switch enter.
+
+```python
+@set_ev_cls(event.EventSwitchEnter) -> def handle_switch_add(self, ev) ->  def add_switch(self, sw) -> def addVertex(self, vid, interface_ids)
+```
+
+The method work flow when a host enter.
+
+```python
+@set_ev_cls(event.EventHostAdd) -> def handle_host_add(self, ev) ->  def add_host(self, h) ->  def addVertex(self, vid, interface_ids) & addEdge(self, v1_id, v2_id, v1_interface, v2_interface)
+```
+
+The method work flow when a switch removed.
+
+```python
+@set_ev_cls(event.EventSwitchLeave) -> def handle_switch_delete(self, ev) ->  def delete_switch(self, sw) -> def removeVertex(self, vid)
+```
+
+The method work flow when a link added.
+
+```python
+@set_ev_cls(event.EventLinkAdd) -> def handle_link_add(self, ev) ->  def add_link(self, name1, mac1, name2, mac2) -> def addEdge(self, v1_id, v2_id, v1_interface, v2_interface)
+```
+
+The method work flow when a link removed.
+
+```python
+@set_ev_cls(event.EventLinkDelete) -> def handle_link_delete(self, ev) -> def delete_link(self, name1, mac1, name2, mac2) -> def removeEdge(self, vid, interface_id)
+```
+
+The method work flow when a port status changed.
+
+```python
+@set_ev_cls(event.EventPortModify) -> def handle_port_modify(self, ev) ->  def change_interface_state(self, name, mac, state) -> def changeInterfaceState(self, v1_id, v1_interface_id, state)
+```
+
+### Flow table setting flow
+
+The brief step:
+
+```
+Exchaneges happens -> Finished changing status -> shorest_path.py -> topo_manager.py -> query the flow suggestion -> Abstract Graph & Route Scheduler -> topo_manager.py -> exhange the suggestion -> shorest_path.py -> setting the flow table
+```
+
+How to set the flow table:
+
+For a data path, just get a following object and send this object to the data path by the send_msg method.
+
+```python
+ofproto_parser.OFPFlowMod(datapath, cookie, cookie_mask, table_id,
+						  command, idle_timeout, hard_timeout,
+						  priority, buffer_id,
+						  out_port, out_group,
+						  flags, match, instructions)
+```
+
+Here, just configure the attribute match, instruction, other attributes will be set default values.
+
+match: the match rule for the packages
+
+instruction: if the packages match the match rule, what actions should be down
 
 ## Abstract graph and Algorithms
 
