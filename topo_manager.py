@@ -6,6 +6,7 @@ track the network's topology from network events.
 
 from ryu.topology.switches import Port, Switch, Link
 from Graph import Graph
+from config import config_algorithm
 
 
 class Device:
@@ -192,9 +193,9 @@ class TopoManager:
             self.abstract_graph.rs.use_spanning_tree = False
             this_list = []
             for h in self.all_hosts:
-                self.abstract_graph.queryShortestPath(self.all_hosts[h].name)
+                self.abstract_graph.queryShortestPath(self.all_hosts[h].name, model=config_algorithm)
             for sw in self.all_switches:
-                this_map = self.abstract_graph.queryShortestPath(self.all_switches[sw].name)
+                this_map = self.abstract_graph.queryShortestPath(self.all_switches[sw].name, model=config_algorithm)
                 for key in this_map:
                     if 'host' in key:
                         data_path = self.all_switches[sw].get_dp()
