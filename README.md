@@ -323,7 +323,7 @@ mininet> link s1 h1 up
 mininet> pingall
 ```
 
-![image-20191223153332012](archived\img\image-20191223153332012.png)
+![image-20191223153332012](archived/img/image-20191223153332012.png)
 
 ### Test case 2: linear 5
 
@@ -339,7 +339,7 @@ mininet> pingall
 mininet> link s2 s3 up
 ```
 
-![image-20191223153324424](archived\img\image-20191223153324424.png)
+![image-20191223153324424](archived/img/image-20191223153324424.png)
 
 ### Test case 3: tree 2
 
@@ -354,7 +354,7 @@ mininet> link s1 s3 down
 mininet> h1 ping h2 -c 1
 ```
 
-![image-20191223153239702](archived\img\image-20191223153239702.png)
+![image-20191223153239702](archived/img/image-20191223153239702.png)
 
 ### Test case 4: assign1
 
@@ -370,7 +370,7 @@ mininet> link s5 s3 up //src and dst not connected: s5 s3
 mininet> pingall
 ```
 
-![image-20191223153215845](archived\img\image-20191223153215845.png)
+![image-20191223153215845](archived/img/image-20191223153215845.png)
 
 ### Test case 5: triangle
 
@@ -389,7 +389,7 @@ mininet> link s1 s3 up
 mininet> h1 ping h3 -c 1
 ```
 
-![image-20191223153205382](archived\img\image-20191223153205382.png)
+![image-20191223153205382](archived/img/image-20191223153205382.png)
 
 ### Test case 6: mesh 5
 
@@ -409,7 +409,7 @@ mininet> link s3 s4 down
 mininet> pingall 
 ```
 
-![image-20191223153050430](archived\img\image-20191223153050430.png)
+![image-20191223153050430](archived/img/image-20191223153050430.png)
 
 ### Test case 7: someloops
 
@@ -431,7 +431,7 @@ mininet> s4 ping s3 -c 1
 
 ### Test case 8：bonus
 
-![img](archived\img\@NI5FARCFQK9Y$D]IFN36D4.png)
+![img](archived/img/@NI5FARCFQK9Y$D]IFN36D4.png)
 
 ```
 vagrant@vagrant:~/sdn-code$ sudo python run_mininet.py triangle
