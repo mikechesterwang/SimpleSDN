@@ -95,8 +95,7 @@ class Graph(object):
 
         if edge_hash_id in self._edges:
             del self._edges[edge_hash_id]
-        
-        
+           
     def addVertex(self, vid, interface_ids):
         """
         添加一个结点，结点的id为指定的id\r\n
@@ -238,6 +237,3 @@ class Graph(object):
                 e = self._edges[eid]
                 rtn += "Edge: {}({}) <-> {}({})\n".format(e.v1_id, e.v1_inerface, e.v2_id, e.v2_inerface)
         return rtn
-    
-
-    

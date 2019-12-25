@@ -145,5 +145,3 @@ class Heap(object):
             rtn += str(self.array[i]) + " "
 
         return rtn
-
-

@@ -33,7 +33,7 @@ class RouteSchduler(object):
             visited[v] = False
             last_out_interface[v] = None
 
-        # BFS
+        # Construct spanninhg tree
         q.enQueue(self.graph._vertices[root_vid])
         while not q.isEmpty():
             u:Vertex = q.deQueue()
@@ -70,7 +70,7 @@ class RouteSchduler(object):
     def queryShortestPath_Dijkstra(self, vid, weight_dict=None):
         """
         Format of weight_dict:\r\n
-        weight_dict[vid][interface_id] = weight (directed weight)\r\n
+        weight_dict[vid][uid] = weight (directed weight)\r\n
         e.g.:\r\n
         10.0
         10.0.0.1 is connected with 10.0.0.2 through 11:11:11:11:11:11 and 22:22:22:22:22:22\r\n
@@ -79,8 +79,8 @@ class RouteSchduler(object):
         |10.0.0.1|->11:11:11:11:11:11->------->|10.0.0.2|\r\n
         |10.0.0.1|<-------<-22:22:22:22:22:22<-|10.0.0.2|\r\n
         Format:\r\n
-        weight_dict['10.0.0.1']['11:11:11:11:11:11'] = 10\r\n
-        weight_dict['10.0.0.2']['22:22:22:22:22:22'] = 20\r\n
+        weight_dict['10.0.0.1']['10.0.0.2'] = 10\r\n
+        weight_dict['10.0.0.2']['10.0.0.1'] = 20\r\n
         """
         def getNeighbor(e, vid):
             return self.graph._vertices[e.v1_id] if e.v2_id == vid else self.graph._vertices[e.v2_id]
@@ -113,6 +113,8 @@ class RouteSchduler(object):
             visited[u] = True
             for interface_id in u.edges.keys():
                 if self.use_spanning_tree and self.blocked[u.id][interface_id]: # Spanning Tree Blocked
+                    continue
+                if not self.graph._interface_clear(u.id, interface_id):
                     continue
                 e_hash_id = u.edges[interface_id]
                 e = self.graph._edges[e_hash_id]
@@ -171,5 +173,3 @@ class RouteSchduler(object):
             rtn[v.id] = last_out_interface[v]
         self.rtn_cache[vid] = rtn
         return rtn
-
-
