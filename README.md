@@ -497,15 +497,15 @@ Simple SDN
 
   -> shortest_paths.py
 
-  ​	-> line 33 34 ![image-20191228213334177](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228213334177.png)
+  ​	-> line 33 34 ![image-20191228213334177](archived\img\image-20191228213334177.png)
 
 - virtual machine
 
-![image-20191228213747937](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228213747937.png)
+![image-20191228213747937](archived\img\image-20191228213747937.png)
 
 - wireshark
 
-![image-20191228213822305](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228213822305.png)
+![image-20191228213822305](archived\img\image-20191228213822305.png)
 
 - using spanning tree to handle broadcast storm
 
@@ -513,13 +513,13 @@ Simple SDN
 
   -> shortest_paths.py
 
-  ​	-> line 33 34 ![image-20191228213940040](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228213940040.png)
+  ​	-> line 33 34 ![image-20191228213940040](archived\img\image-20191228213940040.png)
 
 - virtual machine
 
-![image-20191228214008181](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228214008181.png)
+![image-20191228214008181](archived\img\image-20191228214008181.png)
 
 - wireshark
 
-![image-20191228214045993](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228214045993.png)
+![image-20191228214045993](archived\img\image-20191228214045993.png)
 
