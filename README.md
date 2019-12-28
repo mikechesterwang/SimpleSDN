@@ -427,7 +427,7 @@ mininet> pingall
 mininet> s4 ping s3 -c 1
 ```
 
-![image-20191223152744714](archived\img\image-20191223152744714.png)
+![image-20191223152744714](archived/img/image-20191223152744714.png)
 
 ### Test case 8：bonus
 
@@ -457,11 +457,11 @@ mininet> h1 ping 10.0.0.99 -c 1
 
 #### loop-free topology with BFS
 
-![image-20191228211248704](archived\img\image-20191228211248704.png)
+![image-20191228211248704](archived/img/image-20191228211248704.png)
 
 #### topology with loops and BFS
 
-![image-20191228211745670](archived\img\image-20191228211745670.png)
+![image-20191228211745670](archived/img/image-20191228211745670.png)
 
 #### loop-free topology with Dijkstra
 
@@ -473,9 +473,9 @@ Simple SDN
 
 ​	-> line 180 182 195 197 add parameter *'Dijkstra'* to method *queryShortestPath()*
 
-![image-20191228212159799](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228212159799.png)
+![image-20191228212159799](archived/img/image-20191228212159799.png)
 
-![image-20191228211248704](archived\img\image-20191228211248704.png)
+![image-20191228211248704](archived/img/image-20191228211248704.png)
 
 #### topology with loops and Dijkstra
 
@@ -487,7 +487,7 @@ Simple SDN
 
 ​	-> line 180 182 195 197 add parameter *'Dijkstra'* to method *queryShortestPath()*
 
-![image-20191228211745670](archived\img\image-20191228211745670.png)
+![image-20191228211745670](archived/img/image-20191228211745670.png)
 
 #### broadcast storm
 
@@ -497,15 +497,15 @@ Simple SDN
 
   -> shortest_paths.py
 
-  ​	-> line 33 34 ![image-20191228213334177](archived\img\image-20191228213334177.png)
+  ​	-> line 33 34 ![image-20191228213334177](archived/img/image-20191228213334177.png)
 
 - virtual machine
 
-![image-20191228213747937](archived\img\image-20191228213747937.png)
+![image-20191228213747937](archived/img/image-20191228213747937.png)
 
 - wireshark
 
-![image-20191228213822305](archived\img\image-20191228213822305.png)
+![image-20191228213822305](archived/img/image-20191228213822305.png)
 
 - using spanning tree to handle broadcast storm
 
@@ -513,13 +513,13 @@ Simple SDN
 
   -> shortest_paths.py
 
-  ​	-> line 33 34 ![image-20191228213940040](archived\img\image-20191228213940040.png)
+  ​	-> line 33 34 ![image-20191228213940040](archived/img/image-20191228213940040.png)
 
 - virtual machine
 
-![image-20191228214008181](archived\img\image-20191228214008181.png)
+![image-20191228214008181](archived/img/image-20191228214008181.png)
 
 - wireshark
 
-![image-20191228214045993](archived\img\image-20191228214045993.png)
+![image-20191228214045993](archived/img/image-20191228214045993.png)
 
