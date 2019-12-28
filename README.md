@@ -452,3 +452,74 @@ mininet> h1 ping 10.0.0.99 -c 1
 - loop mode = True，sp mode =True
 
   阻止广播风暴，开启wireshark，出现少量包后风暴停止
+
+### Test results
+
+#### loop-free topology with BFS
+
+![image-20191228211248704](archived\img\image-20191228211248704.png)
+
+#### topology with loops and BFS
+
+![image-20191228211745670](archived\img\image-20191228211745670.png)
+
+#### loop-free topology with Dijkstra
+
+**Before test**
+
+Simple SDN
+
+-> topo_manager.py
+
+​	-> line 180 182 195 197 add parameter *'Dijkstra'* to method *queryShortestPath()*
+
+![image-20191228212159799](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228212159799.png)
+
+![image-20191228211248704](archived\img\image-20191228211248704.png)
+
+#### topology with loops and Dijkstra
+
+**Before test**
+
+Simple SDN
+
+-> topo_manager.py
+
+​	-> line 180 182 195 197 add parameter *'Dijkstra'* to method *queryShortestPath()*
+
+![image-20191228211745670](archived\img\image-20191228211745670.png)
+
+#### broadcast storm
+
+- enable broadcast storm
+
+- SimpleSDN
+
+  -> shortest_paths.py
+
+  ​	-> line 33 34 ![image-20191228213334177](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228213334177.png)
+
+- virtual machine
+
+![image-20191228213747937](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228213747937.png)
+
+- wireshark
+
+![image-20191228213822305](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228213822305.png)
+
+- using spanning tree to handle broadcast storm
+
+- SimpleSDN
+
+  -> shortest_paths.py
+
+  ​	-> line 33 34 ![image-20191228213940040](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228213940040.png)
+
+- virtual machine
+
+![image-20191228214008181](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228214008181.png)
+
+- wireshark
+
+![image-20191228214045993](C:\Users\22805\AppData\Roaming\Typora\typora-user-images\image-20191228214045993.png)
+
