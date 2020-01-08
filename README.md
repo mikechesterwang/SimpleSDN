@@ -469,25 +469,21 @@ mininet> h1 ping 10.0.0.99 -c 1
 
 Simple SDN
 
--> topo_manager.py
+-> config.py
 
-​	-> line 180 182 195 197 add parameter *'Dijkstra'* to method *queryShortestPath()*
+​	![image-20200108185649427](archived/img/image-20200108185649427.png)
 
-![image-20191228212159799](archived/img/image-20191228212159799.png)
+​	’BFS‘ change to 'Dijkstra’
 
-![image-20191228211248704](archived/img/image-20191228211248704.png)
+![image-20200108190329816](archived/img/image-20200108190329816.png)
 
 #### topology with loops and Dijkstra
 
 **Before test**
 
-Simple SDN
+as before，change to Dijkstra
 
--> topo_manager.py
-
-​	-> line 180 182 195 197 add parameter *'Dijkstra'* to method *queryShortestPath()*
-
-![image-20191228211745670](archived/img/image-20191228211745670.png)
+![image-20200108190610277](archived/img/image-20200108190610277.png)
 
 #### broadcast storm
 
@@ -523,3 +519,8 @@ Simple SDN
 
 ![image-20191228214045993](archived/img/image-20191228214045993.png)
 
+- also with Dijkstra
+
+![image-20200108190810260](archived/img/image-20200108190810260.png)
+
+![image-20200108191018118](archived/img/image-20200108191018118.png)
